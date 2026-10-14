@@ -1,0 +1,28 @@
+# Adds a Selenium/Chrome service on top of the base stack, for automated
+# UI/integration testing (see tests/e2e/selenium.test.mjs and
+# .github/workflows/ci.yml). Not used for normal development.
+#
+# Run together with the base file:
+#   docker compose -f compose.yaml -f docker-compose.ci.yml up -d --build
+#
+# Why this exists: Chrome runs *inside* this container. A container has its
+# own private network namespace, so "127.0.0.1" or "localhost" from inside
+# it refers to itself, not your host machine or the other containers -
+# hitting those from here just gets connection refused. Putting this
+# service on the same "safesplit-network" as everything else lets Chrome
+# reach the reverse proxy directly by its Compose service name instead
+# (https://nginx), via Docker's built-in DNS. That works identically on a
+# local machine and on a GitHub Actions runner, unlike relying on host
+# networking or host.docker.internal (which behave differently across
+# Linux/macOS/Windows).
+services:
+  selenium:
+    image: selenium/standalone-chrome:latest
+    container_name: safesplit-selenium
+    shm_size: "2gb"
+    ports:
+      - "4444:4444"
+    depends_on:
+      - nginx
+    networks:
+      - safesplit-network

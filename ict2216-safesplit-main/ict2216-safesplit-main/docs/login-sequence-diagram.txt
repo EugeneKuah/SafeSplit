@@ -1,0 +1,35 @@
+title SafeSplit Secure Login Sequence
+
+participant User
+participant Frontend
+participant "Nginx HTTPS Proxy" as Nginx
+participant "Backend API" as API
+participant "PostgreSQL Database" as DB
+participant "Audit Log" as Audit
+
+User->Frontend: Enter email and password
+Frontend->Nginx: POST /api/auth/login (HTTPS)
+Nginx->API: Forward request
+API->API: Validate input and rate limit
+API->DB: Retrieve user by email
+
+alt Invalid credentials, locked or suspended
+    API->DB: Record failed attempt / lockout state
+    API->Audit: Record failure
+    API-->Nginx: Generic authentication error
+    Nginx-->Frontend: Error response
+    Frontend-->User: Display error
+else Valid password but unverified email
+    API->Audit: Record unverified login attempt
+    API-->Nginx: Verification required
+    Nginx-->Frontend: Error response
+    Frontend-->User: Display verification message
+else Successful login
+    API->API: Verify bcrypt password hash
+    API->DB: Revoke old sessions
+    API->DB: Create session record with expiry, IP and user agent
+    API->Audit: Record successful login
+    API-->Nginx: Set HttpOnly, Secure, SameSite=Strict session cookie
+    Nginx-->Frontend: Login success
+    Frontend-->User: Display dashboard
+end

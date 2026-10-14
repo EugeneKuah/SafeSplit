@@ -1,0 +1,12 @@
+{
+  "name": "safesplit-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Selenium integration/UI tests for SafeSplit, run against the full docker compose stack.",
+  "scripts": {
+    "test": "node --test selenium.test.mjs"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^4.27.0"
+  }
+}

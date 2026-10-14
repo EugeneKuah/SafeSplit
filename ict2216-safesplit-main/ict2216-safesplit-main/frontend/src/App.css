@@ -1,0 +1,329 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: #172033;
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.24), transparent 32rem),
+    radial-gradient(circle at bottom right, rgba(20, 184, 166, 0.18), transparent 28rem),
+    #eef4fb;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+.page {
+  width: min(1180px, 92vw);
+  margin: 0 auto;
+  padding: 28px 0 56px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 34px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0f172a, #2563eb);
+  color: white;
+  font-weight: 900;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.22);
+}
+
+.topbar strong {
+  display: block;
+  font-size: 1.05rem;
+}
+
+.topbar span {
+  display: block;
+  color: #64748b;
+  font-size: 0.88rem;
+}
+
+.auth-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+  min-height: 650px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 30px 90px rgba(15, 23, 42, 0.16);
+  backdrop-filter: blur(18px);
+}
+
+.hero-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 56px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 64, 175, 0.88)),
+    radial-gradient(circle at 20% 20%, rgba(45, 212, 191, 0.35), transparent 18rem);
+  color: white;
+}
+
+.hero-panel::after {
+  content: '';
+  position: absolute;
+  right: -110px;
+  bottom: -120px;
+  width: 310px;
+  height: 310px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 34px rgba(255, 255, 255, 0.05);
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #2563eb;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eyebrow.light {
+  color: #93c5fd;
+}
+
+.hero-panel h1 {
+  position: relative;
+  margin: 0;
+  max-width: 560px;
+  font-size: clamp(2.35rem, 5vw, 4.7rem);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+}
+
+.hero-panel p {
+  position: relative;
+  max-width: 530px;
+  margin: 22px 0 0;
+  color: #dbeafe;
+  font-size: 1.06rem;
+}
+
+.feature-list {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.feature-list div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.feature-list span {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(45, 212, 191, 0.22);
+  color: #99f6e4;
+  font-weight: 900;
+}
+
+.auth-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 42px;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: min(440px, 100%);
+  margin: 0 auto 18px;
+  padding: 6px;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #f8fafc;
+}
+
+.tabs button,
+.logout-button,
+.primary-button {
+  border: 0;
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.tabs button {
+  display: block;
+  border-radius: 13px;
+  padding: 12px 18px;
+  background: transparent;
+  color: #475569;
+  text-align: center;
+  text-decoration: none;
+}
+
+.tabs button.active {
+  background: #0f172a;
+  color: white;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+}
+
+.auth-card {
+  width: min(440px, 100%);
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.1);
+}
+
+.card-heading h2 {
+  margin: 0;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  font-size: 1.75rem;
+}
+
+.hint {
+  margin: 8px 0 22px;
+  color: #64748b;
+}
+
+.auth-card label {
+  display: block;
+  margin-top: 16px;
+  color: #0f172a;
+  text-align: left;
+  font-size: 0.94rem;
+  font-weight: 800;
+}
+
+.auth-card input {
+  width: 100%;
+  margin-top: 8px;
+  padding: 13px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  outline: none;
+  background: #ffffff;
+  color: #111827;
+  transition: border 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth-card input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.auth-card input::placeholder {
+  color: #94a3b8;
+}
+
+.password-rules {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border: 1px solid #dbeafe;
+  border-radius: 16px;
+  background: #eff6ff;
+  color: #334155;
+  font-size: 0.9rem;
+}
+
+.password-rules span {
+  font-weight: 800;
+  color: #1e40af;
+}
+
+.password-rules ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.primary-button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 18px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #0f172a, #1d4ed8);
+  color: white;
+  box-shadow: 0 14px 32px rgba(37, 99, 235, 0.25);
+}
+
+.primary-button:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.message {
+  margin-top: 16px;
+  color: #b45309;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Reused inside AppShell's header for the "Sign out" control — sized
+   down slightly there via an inline style override. */
+.logout-button {
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: #991b1b;
+  color: white;
+  box-shadow: 0 12px 26px rgba(153, 27, 27, 0.18);
+}
+
+@media (max-width: 900px) {
+  .auth-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-panel {
+    padding: 38px;
+  }
+
+  .auth-panel {
+    padding: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    width: min(100% - 24px, 1180px);
+    padding-top: 18px;
+  }
+}

@@ -1,0 +1,40 @@
+name: OWASP Dependency Check
+
+on:
+  push:
+    branches:
+      - Development
+  pull_request:
+    branches:
+      - Development
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run OWASP Dependency Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: "SafeSplit"
+          path: "."
+          format: "HTML"
+          out: "dependency-check-report"
+          # The Node Audit Analyzer submits package-lock.json to npm's public
+          # audit API, which currently rejects payloads generated from newer
+          # lockfile formats ("Invalid payload submitted to Node Audit API").
+          # Disabling it avoids that failure; npm packages are still scanned
+          # for known vulnerabilities via the Node Package Analyzer (NVD/OSS
+          # Index data), just not via this specific live API call.
+          args: >-
+            --disableNodeAudit
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dependency-Check-Report
+          path: dependency-check-report

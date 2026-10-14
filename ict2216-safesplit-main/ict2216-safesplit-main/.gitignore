@@ -1,0 +1,7 @@
+node_modules/
+.env
+*.pem
+postgres_data/
+certs/
+.env.*
+!.env.example

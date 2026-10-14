@@ -1,0 +1,80 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+    container_name: safesplit-frontend
+    expose:
+      - "80"
+    depends_on:
+      - backend
+    networks:
+      - safesplit-network
+
+  backend:
+    build:
+      context: ./backend
+    container_name: safesplit-backend
+    expose:
+      - "3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      FRONTEND_URL: ${FRONTEND_URL}
+      COOKIE_SECURE: "true"
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_SECURE: ${SMTP_SECURE}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      EMAIL_FROM: ${EMAIL_FROM}
+    networks:
+      - safesplit-network
+
+  db:
+    image: postgres:16-alpine
+    container_name: safesplit-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    networks:
+      - safesplit-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: safesplit-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - safesplit-network
+
+volumes:
+  postgres_data:
+
+networks:
+  safesplit-network:
+    driver: bridge

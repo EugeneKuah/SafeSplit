@@ -1,0 +1,106 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #172033;
+  background: #eef4fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  /* ----------------------------------------------------------------
+     SafeSplit design tokens — light theme.
+     Used by the sidebar app shell and the Dashboard/Groups/Settle/
+     History/Admin pages. Values are chosen to match the navy + blue
+     (with a touch of teal) palette already used on the auth screens
+     in App.css, just expressed as reusable custom properties.
+     ---------------------------------------------------------------- */
+  --navy: #0f172a;
+
+  --bg: #eef4fb;
+  --bg2: #ffffff;
+  --bg3: #ffffff;
+  --surface: #ffffff;
+  --surface2: #f1f5f9;
+  --border: #e2e8f0;
+  --border2: #cbd5e1;
+  --border3: #94a3b8;
+
+  --text: #0f172a;
+  --text2: #64748b;
+  --text3: #94a3b8;
+
+  /* Primary brand / interactive accent (image 1's blue) */
+  --teal: #2563eb;
+  --teal-dim: #1d4ed8;
+  --teal-bg: rgba(37, 99, 235, 0.08);
+  --teal-border: rgba(37, 99, 235, 0.25);
+
+  --red: #dc2626;
+  --red-bg: rgba(220, 38, 38, 0.08);
+  --red-border: rgba(220, 38, 38, 0.22);
+
+  --amber: #b45309;
+  --amber-bg: rgba(180, 83, 9, 0.08);
+  --amber-border: rgba(180, 83, 9, 0.22);
+
+  --green: #059669;
+  --green-bg: rgba(5, 150, 105, 0.08);
+
+  /* Secondary accent (image 1's decorative teal), used for "info" */
+  --blue: #0d9488;
+  --blue-bg: rgba(13, 148, 136, 0.08);
+
+  --font-display: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.10);
+  --shadow-lg: 0 24px 64px rgba(15, 23, 42, 0.18);
+
+  --transition: 150ms ease;
+}
+
+a {
+  color: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border3);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

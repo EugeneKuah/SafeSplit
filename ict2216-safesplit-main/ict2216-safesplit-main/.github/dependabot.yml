@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/backend"
+    target-branch: "Development"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    target-branch: "Development"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
